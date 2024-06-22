@@ -40,6 +40,11 @@ buttonUsuario.addEventListener('click', function() {
 // validacion del numero secreto
 function validarNumero() { 
     if (!isNaN(numeroUsuario)) { // validacion de que el campo no este vacio
+
+        //texto dinamico de intentos
+        contadorIntentos++;
+        intentos.textContent = `Quedan ${posiblesIntentos - contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`;
+
         if (numeroUsuario === numeroSecreto) { 
             // cambios del texto dinamico
             titulosDinamico(' Correcto!', 'Descubriste el número secreto!')
@@ -59,9 +64,6 @@ function validarNumero() {
 
             //selecciona input para cambio constante
             inputUsuario.select();
-            //texto dinamico
-            contadorIntentos++;
-            intentos.textContent = `Quedan ${posiblesIntentos - contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`;
 
             // validacion de termino de intentos
             if (posiblesIntentos - contadorIntentos == 0) {
@@ -90,7 +92,7 @@ function finalizacionTurno() {
     buttonUsuario.textContent = 'Reiniciar'; // cambia la funcionalidad del boton
 }
 
-// validacion del input para el usuario solo numero del 1 - numero deseado
+// validacion del input para el usuario solo numero del 1 hasta numero validos
 document.getElementById('numero-usuario').addEventListener('input', function(event) {
     numeroUsuario = this;
     // Remover cualquier carácter que no sea un número
