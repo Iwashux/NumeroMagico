@@ -7,3 +7,5 @@
     - Edición de texto dinamico
     - Animación de error
     - Limitaciones de input (solo numerioco, positivo, limitado a numeros deseados)
+
+https://iwashux.github.io/NumeroMagico/
