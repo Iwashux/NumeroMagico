@@ -57,18 +57,18 @@ function validarNumero() {
             inputUsuario.classList.add('error'); // agrega animacion error
             intentos.classList.add('error');
 
+            //selecciona input para cambio constante
+            inputUsuario.select();
+            //texto dinamico
+            contadorIntentos++;
+            intentos.textContent = `Quedan ${posiblesIntentos - contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`;
+
             // validacion de termino de intentos
             if (posiblesIntentos - contadorIntentos == 0) {
                 // cambios del texto dinamico
                 titulosDinamico(' Perdiste!', 'Vuelve a intentarlo')
                 finalizacionTurno()
             }
-
-            //selecciona input para cambio constante
-            inputUsuario.select();
-            //texto dinamico
-            contadorIntentos++;
-            intentos.textContent = `Quedan ${posiblesIntentos - contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`;
         }
         
         // termina animacion error
