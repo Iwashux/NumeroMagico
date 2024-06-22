@@ -36,11 +36,13 @@ body {
     align-items: center;
     position: absolute;
     bottom: 0;
+    width: 100%;
 }
 
 .container__informaciones {
-    flex: 1;
+    flex: 2;
     padding: 20px;
+    text-align: center;
 }
 
 .container__boton {
@@ -87,6 +89,8 @@ img{
     width: 600px;
     height: 700px;
     object-fit: contain;
+    flex: 1;
+    border-bottom-right-radius: 24px;
 }
 
 input, button {

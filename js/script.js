@@ -7,9 +7,9 @@ textoNumeros = document.getElementById("numeros-validos"),
 inputUsuario = document.getElementById("numero-usuario"),
 buttonUsuario = document.getElementById("button-usuario");
 
-let numerosValidos = 100, // cantidad de numeros
+let numerosValidos = 100, // cantidad de numeros validos
 posiblesIntentos = 6, // intentos
-contadorIntentos = 0; // contador
+contadorIntentos = 0;
 
 let numeroSecreto = Math.floor(Math.random() * numerosValidos)+1; // numero aleatorio
 
@@ -42,19 +42,33 @@ function validarNumero() {
     if (!isNaN(numeroUsuario)) { // validacion de que el campo no este vacio
         if (numeroUsuario === numeroSecreto) { 
             // cambios del texto dinamico
-            textoDinamico(' Correcto!', 'Descubriste el número secreto!')
+            titulosDinamico(' Correcto!', 'Descubriste el número secreto!')
             finalizacionTurno()
+            intentos.textContent = `Te tomó ${contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`
             trofeo.style.color = '#ffee00'
 
         }else{
             if(numeroUsuario < numeroSecreto) {
-                textoDinamico(' Incorrecto!', 'El número secreto es MAYOR') 
+                titulosDinamico(' Incorrecto!', 'El número secreto es MAYOR') 
             } else {
-                textoDinamico(' Incorrecto!', 'El número secreto es Menor')
+                titulosDinamico(' Incorrecto!', 'El número secreto es Menor')
             }
             
             inputUsuario.classList.add('error'); // agrega animacion error
             intentos.classList.add('error');
+
+            // validacion de termino de intentos
+            if (posiblesIntentos - contadorIntentos == 0) {
+                // cambios del texto dinamico
+                titulosDinamico(' Perdiste!', 'Vuelve a intentarlo')
+                finalizacionTurno()
+            }
+
+            //selecciona input para cambio constante
+            inputUsuario.select();
+            //texto dinamico
+            contadorIntentos++;
+            intentos.textContent = `Quedan ${posiblesIntentos - contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`;
         }
         
         // termina animacion error
@@ -62,24 +76,11 @@ function validarNumero() {
             inputUsuario.classList.remove('error');
             intentos.classList.remove('error');
         }, 500);
-
-        //selecciona input para cambio constante
-        inputUsuario.select();
-        contadorIntentos++;
-        //texto dinamico
-        intentos.textContent = `Quedan ${posiblesIntentos - contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`;
-
-        // validacion de termino de intentos
-        if (posiblesIntentos - contadorIntentos == 0 && numeroUsuario != numeroSecreto) {
-            // cambios del texto dinamico
-            textoDinamico(' Perdiste!', 'Vuelve a intentarlo')
-            finalizacionTurno()
-        }
     }
 }
 
 // texto dinamico para la validacion del numero
-function textoDinamico(textTitulo, textTexto) {
+function titulosDinamico(textTitulo, textTexto) {
     title.textContent = textTitulo;
     text.textContent = textTexto;
 }
@@ -108,7 +109,3 @@ document.getElementById('numero-usuario').addEventListener('input', function(eve
         numeroUsuario.value = '';
     }
 });
-
-
-
-
