@@ -32,31 +32,29 @@ buttonUsuario.addEventListener('click', function() {
     // comprueba si el boton dice Enviar
     if(buttonUsuario.textContent === 'Enviar'){
         validarNumero();
-    }else{ // caso contrario se reinicia la pagina
+    }else{ // caso contrario se reinicia la pagina (boton = Reiniciar)
         location.reload();
     }
 });
 
-function validarNumero() { // validacion del numero secreto
+// validacion del numero secreto
+function validarNumero() { 
     if (!isNaN(numeroUsuario)) { // validacion de que el campo no este vacio
         if (numeroUsuario === numeroSecreto) { 
             // cambios del texto dinamico
-            title.textContent = ' Correcto!';
-            text.textContent = 'Descubriste el número secreto!';
+            textoDinamico(' Correcto!', 'Descubriste el número secreto!')
             trofeo.style.color = '#ffee00'
             inputUsuario.disabled = true;
             buttonUsuario.textContent = 'Reiniciar';
 
         }else if(numeroUsuario < numeroSecreto){
             // cambios del texto dinamico
-            title.textContent = ' Incorrecto!';
-            text.textContent = 'El número secreto es MAYOR';
+            textoDinamico(' Incorrecto!', 'El número secreto es MAYOR')
             inputUsuario.classList.add('error'); // agrega animacion error
 
         }else{
             // cambios del texto dinamico
-            title.textContent = ' Incorrecto!';
-            text.textContent = 'El número secreto es Menor';
+            textoDinamico(' Incorrecto!', 'El número secreto es Menor')
             inputUsuario.classList.add('error'); // agrega animacion error
         }
         
@@ -74,12 +72,16 @@ function validarNumero() { // validacion del numero secreto
         // validacion de termino de intentos
         if (posiblesIntentos - contadorIntentos == 0 && numeroUsuario != numeroSecreto) {
             // cambios del texto dinamico
-            title.textContent = ' Perdiste!';
-            text.textContent = 'Vuelve a intentarlo';
+            textoDinamico(' Perdiste!', 'Vuelve a intentarlo')
             inputUsuario.disabled = true;
             buttonUsuario.textContent = 'Reiniciar'; // cambia la funcionalidad del boton
         }
     }
+}
+
+function textoDinamico(textTitulo, textTexto) {
+    title.textContent = textTitulo;
+    text.textContent = textTexto;
 }
 
 // validacion del input para el usuario solo numero del 1 - numero deseado
