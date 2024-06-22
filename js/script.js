@@ -14,7 +14,7 @@ contadorIntentos = 0;
 let numeroSecreto = Math.floor(Math.random() * numerosValidos)+1; // numero aleatorio
 
 // ingresa texto a partir de parametros anteriores
-textoNumeros.textContent = `Ingresa un numero del 1 al ${numerosValidos}` 
+textoNumeros.textContent = `Ingresa un numero del 1 al ${numerosValidos}`;
 intentos.textContent = `Tienes ${posiblesIntentos} intentos`;
 
 // validacion por precionar Enter
@@ -22,7 +22,7 @@ inputUsuario.addEventListener('keydown', function(event) {
     numeroUsuario = parseInt(this.value);
     // Comprobar si la tecla presionada es Enter
     if (event.key === 'Enter' ) {
-        validarNumero()
+        validarNumero();
     }
 });
 
@@ -47,16 +47,16 @@ function validarNumero() {
 
         if (numeroUsuario === numeroSecreto) { 
             // cambios del texto dinamico
-            titulosDinamico(' Correcto!', 'Descubriste el número secreto!')
-            finalizacionTurno()
-            intentos.textContent = `Te tomó ${contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`
-            trofeo.style.color = '#ffee00'
+            titulosDinamico(' Correcto!', 'Descubriste el número secreto!');
+            finalizacionTurno();
+            intentos.textContent = `Te tomó ${contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}`;
+            trofeo.style.color = '#ffee00';
 
         }else{
             if(numeroUsuario < numeroSecreto) {
-                titulosDinamico(' Incorrecto!', 'El número secreto es MAYOR') 
+                titulosDinamico(' Incorrecto!', 'El número secreto es MAYOR');
             } else {
-                titulosDinamico(' Incorrecto!', 'El número secreto es Menor')
+                titulosDinamico(' Incorrecto!', 'El número secreto es Menor');
             }
             
             inputUsuario.classList.add('error'); // agrega animacion error
@@ -68,8 +68,9 @@ function validarNumero() {
             // validacion de termino de intentos
             if (posiblesIntentos - contadorIntentos == 0) {
                 // cambios del texto dinamico
-                titulosDinamico(' Perdiste!', 'Vuelve a intentarlo')
-                finalizacionTurno()
+                titulosDinamico(' Perdiste!', 'Vuelve a intentarlo');
+                intentos.textContent = `Quedan ${posiblesIntentos - contadorIntentos} intento${contadorIntentos != 1 ? 's' : ''}, era el Número ${numeroSecreto}`;
+                finalizacionTurno();
             }
         }
         
