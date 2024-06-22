@@ -8,4 +8,4 @@
     - Animación de error
     - Limitaciones de input (solo numerioco, positivo, limitado a numeros deseados)
 
-https://iwashux.github.io/NumeroMagico/
+https://iwashux.github.io/NumeroSecreto/
