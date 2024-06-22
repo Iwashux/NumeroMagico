@@ -43,24 +43,24 @@ function validarNumero() {
         if (numeroUsuario === numeroSecreto) { 
             // cambios del texto dinamico
             textoDinamico(' Correcto!', 'Descubriste el número secreto!')
+            finalizacionTurno()
             trofeo.style.color = '#ffee00'
-            inputUsuario.disabled = true;
-            buttonUsuario.textContent = 'Reiniciar';
-
-        }else if(numeroUsuario < numeroSecreto){
-            // cambios del texto dinamico
-            textoDinamico(' Incorrecto!', 'El número secreto es MAYOR')
-            inputUsuario.classList.add('error'); // agrega animacion error
 
         }else{
-            // cambios del texto dinamico
-            textoDinamico(' Incorrecto!', 'El número secreto es Menor')
+            if(numeroUsuario < numeroSecreto) {
+                textoDinamico(' Incorrecto!', 'El número secreto es MAYOR') 
+            } else {
+                textoDinamico(' Incorrecto!', 'El número secreto es Menor')
+            }
+            
             inputUsuario.classList.add('error'); // agrega animacion error
+            intentos.classList.add('error');
         }
         
         // termina animacion error
         setTimeout(() => {
             inputUsuario.classList.remove('error');
+            intentos.classList.remove('error');
         }, 500);
 
         //selecciona input para cambio constante
@@ -73,15 +73,20 @@ function validarNumero() {
         if (posiblesIntentos - contadorIntentos == 0 && numeroUsuario != numeroSecreto) {
             // cambios del texto dinamico
             textoDinamico(' Perdiste!', 'Vuelve a intentarlo')
-            inputUsuario.disabled = true;
-            buttonUsuario.textContent = 'Reiniciar'; // cambia la funcionalidad del boton
+            finalizacionTurno()
         }
     }
 }
 
+// texto dinamico para la validacion del numero
 function textoDinamico(textTitulo, textTexto) {
     title.textContent = textTitulo;
     text.textContent = textTexto;
+}
+
+function finalizacionTurno() {
+    inputUsuario.disabled = true;
+    buttonUsuario.textContent = 'Reiniciar'; // cambia la funcionalidad del boton
 }
 
 // validacion del input para el usuario solo numero del 1 - numero deseado
